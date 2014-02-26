@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0047)http://clubajax.org/files/tests/plain-text.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><script type="text/javascript" src="chrome-extension://mfjanagceblmeijonojeojjmjfiokgeo/domify.js"></script>
+    <title>Club AJAX Plain Text Example</title>
+    <style>body{margin:5px;font-family:sans-serif;font-size:14px}h1{padding:5px;margin:5px;font-size:24px}textarea{font-size:13px;font-family:monospace;line-height:18px;width:350px;height:320px;margin:10px}span{white-space:p}#example{border:1px solid #ccc;width:344px;margin:10px;padding:3px}</style>
+	<script>debug=true;</script>
+	<script src="./Club AJAX Plain Text Example_files/consoleFix.js"></script>
+	<script src="./Club AJAX Plain Text Example_files/plain-text.js"></script>
+    <script>window.onload=function(){window.nodes=document.getElementById("example");document.getElementById("ta").value=getPlainText(nodes);}</script>
+</head>
+<body>
+	<h1>Club AJAX Plain Text Example</h1>
+	<em>The plain text result in the text area is from<br>the HTML text below.</em><br>
+	<textarea id="ta"></textarea>
+	<div id="example">
+		<table>
+			<tbody><tr>
+				<td>TL</td>
+				<td>TR</td>
+			</tr>
+			<tr>
+				<td>BL</td>
+				<td>BR</td>
+			</tr>
+		</tbody></table>
+		<p>
+			Start a paragraph, <span>then a span</span> end para.
+		</p>
+		<p>
+			New Para then&nbsp;&nbsp;&nbsp;&nbsp;4 spaces, then a line<br>break.
+		</p>
+		<p style="display:none;">
+			This should not show (display:none).
+		</p>
+		<!-- <p>This should not show (comment).</p>-->
+		<p>
+			This is text before<span style="display:block;">a span with display:block.</span>...and after.
+		</p>
+		<p id="preNode" style="white-space:pre;">
+	This			text
+			is pre
+		text.
+		</p>
+		<script>var a="Mike"</script>
+		<ul>
+			<li>one bullet</li>
+			<li>two bullet</li>
+			<li>three bullet</li>
+		</ul>
+	</div>
+
+
+</body></html>

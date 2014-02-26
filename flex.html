@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="reset.css" type="text/css">
+    <style>
+        .wrapper{
+            margin: 100px;
+        }
+        ul {
+           display: -webkit-flexbox;
+           width: 300px;
+           background-image: -webkit-liner-gradient(top, whiteSmoke 0%, #eee 100%);
+           -webkit-box-shadow: 2px 2px 2px #aaa;
+           -webkit-flex-wrap:wrap;
+        flex-flow:column wrap;
+        }
+        ul li {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+        canvas{
+            border:1px solid yellow;
+        }
+    </style>
+    <script src="jquery-1.4.2.js">
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            var started = false;
+            var canvas = $('canvas')[0];
+            var ctx = canvas.getContext('2d');
+            $('canvas').mousemove(function(e){
+                var x = e.clientX;
+                var y = e.clientY;
+                if(!started){
+                    ctx.beginPath();
+                    ctx.moveTo(x,y);
+                    started = true;
+                }else{
+                    ctx.lineTo(x,y);
+                    console.log('x',x);
+                    console.log('y',y)
+                    ctx.stroke();
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <section class="wrapper">
+        <ul>
+            <li>An item</li>
+            <li>Another item</li>
+            <li>The last item</li>
+        </ul>  
+    </section>
+    <canvas id="my-canvas" class="can"></canvas>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试DOMSubtreeModified</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
+</head>
+<body>
+    <i>
+    </i>
+    <script>
+        //动态创建的元素，使用innerHTML  = ''不会触发DOMSubtreeModified
+        $(function(){
+            var ev = false;
+            var element = document.createElement('i');
+            var child = document.createElement('em');
+            element.addEventListener('DOMSubtreeModified',function(){
+                ev = true;
+            },false);
+            // element.appendChild(child);
+            element.innerHTML = '';
+            element = null;
+            alert(ev);
+        })
+    </script>
+</body>
+</html>

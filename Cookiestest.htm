@@ -1,0 +1,82 @@
+
+<!-- saved from url=(0061)http://mrcoles.com/media/test/cookies-max-age-vs-expires.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><script type="text/javascript" src="chrome-extension://mfjanagceblmeijonojeojjmjfiokgeo/domify.js"></script>
+		<title>Cookies test</title>
+		<style type="text/css">div { margin-bottom: 18px; } p { max-width: 890px; }</style>
+		<script type="text/javascript">
+		var Cookie = function() {
+
+			this.write = function(key, max_age_secs, expires_secs) {
+				var c = this._getWrite(key, max_age_secs, expires_secs);
+				this._doWrite(c);
+				return c;
+			}
+			this._getWrite = function(key, max_age_secs, expires_secs) {
+				var c = key + '=1;path=/;', d = new Date();
+				if (expires_secs !== null)  {
+					d.setTime(d.getTime()+(1000*expires_secs));
+					c += 'expires=' + d.toGMTString() + ';';
+				}
+				if (max_age_secs !== null)
+					c += 'max-age=' + max_age_secs + ';';
+				return c;
+			}
+			this._doWrite = function(c) {
+				document.cookie = c;
+			}
+
+			this.read = function(key) {
+				var c = document.cookie;
+				if (c.length != 0) {
+					var val = c.match('(^|;)[\\s]*' + key + '=([^;]*)');
+					return val === null ? '' : decodeURIComponent(val[2]);
+				}
+				return '';
+			}
+
+			this.test = function(key, max_age_secs, expires_secs) {
+				var r = document.createElement('DIV');
+				r.id = key;
+				document.body.appendChild(r);
+
+				var self = this;
+				var cookie_str = this._getWrite(key, max_age_secs, expires_secs);
+
+				var msg = '<strong>Starting test for "' + key + '" (';
+				if (max_age_secs !== null) {
+					msg += 'max_age_secs: ' + max_age_secs;
+					if (expires_secs) msg += ', '
+				}
+				if (expires_secs) {
+					msg += 'expires_secs: ' + expires_secs;
+				}
+				msg += ')</strong> &nbsp; <small>"document.cookie=' + cookie_str + '"</small><br />';
+				r.innerHTML = msg;
+
+				this._doWrite(cookie_str);
+				var interval = window.setInterval(function() {
+					var c = self.read(key);
+					r.innerHTML += (c || 'none!') + '<br />'
+					if (!c)	window.clearInterval(interval);
+				}, 1000);
+			}
+		}
+
+		window.onload = function() {
+			var cookie = new Cookie(), k1 = 'test1', k2 = 'test2', k3 = 'test3', k4 = 'test4', k5 = 'test5';
+			cookie.test(k1, 5, 5);
+			cookie.test(k2, 2, 5);
+			cookie.test(k3, 5, 2);
+			cookie.test(k4, 5, null);
+			cookie.test(k5, null, 5);
+		}
+		</script>
+	</head>
+	<body>
+		<a style="float:right;" href="http://mrcoles.com/">Home</a>
+		<h3>Cookie Test Demo: max-age vs expires</h3>
+		<p>Each test below sets a cookie with some combination of the "max-age" or "expires" parameters. It turns out that Internet Explorer 6 (ie6), Internet Explorer 7 (ie7), and Internet Explorer 8 (ie8) do not support the "max-age" parameter (they just ignore it), but all browsers support the "expires" parameter as long as the date is formated in GMT time, e.g. "(new Date).toGMTString()".</p>
+		<noscript>&lt;p&gt;Javascript must be enabled to view this demo.&lt;/p&gt;</noscript>
+	
+
+<div id="test1"><strong>Starting test for "test1" (max_age_secs: 5, expires_secs: 5)</strong> &nbsp; <small>"document.cookie=test1=1;path=/;expires=Tue, 11 Feb 2014 09:16:45 GMT;max-age=5;"</small><br>1<br>1<br>1<br>1<br>none!<br></div><div id="test2"><strong>Starting test for "test2" (max_age_secs: 2, expires_secs: 5)</strong> &nbsp; <small>"document.cookie=test2=1;path=/;expires=Tue, 11 Feb 2014 09:16:45 GMT;max-age=2;"</small><br>1<br>1<br>none!<br></div><div id="test3"><strong>Starting test for "test3" (max_age_secs: 5, expires_secs: 2)</strong> &nbsp; <small>"document.cookie=test3=1;path=/;expires=Tue, 11 Feb 2014 09:16:42 GMT;max-age=5;"</small><br>1<br>1<br>1<br>1<br>none!<br></div><div id="test4"><strong>Starting test for "test4" (max_age_secs: 5)</strong> &nbsp; <small>"document.cookie=test4=1;path=/;max-age=5;"</small><br>1<br>1<br>1<br>1<br>none!<br></div><div id="test5"><strong>Starting test for "test5" (expires_secs: 5)</strong> &nbsp; <small>"document.cookie=test5=1;path=/;expires=Tue, 11 Feb 2014 09:16:45 GMT;"</small><br>1<br>1<br>1<br>none!<br></div></body></html>

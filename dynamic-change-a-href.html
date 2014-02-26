@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态改变a的href值</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
+</head>
+<body>
+    <a href="http://www.iqiyi.com">Go to iqiyi！！！</a>
+    <a href="http://www.iqiyi.com" id="a2">Go to iqiyi！！！ with jquery</a>
+    <script>
+        var links = document.getElementsByTagName('a');
+        for(var i=0; i < links.length; i++){
+            links[i].onclick = function(){
+                this.href = 'http://www.baidu.com/'; // Insert link here
+            };
+        }
+        $('#a2').click(function(){
+            this.attr('href','http://www.baidu.com/');
+        })
+    </script>
+</body>
+</html>
