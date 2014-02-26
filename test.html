@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+ div { width:60px; height:60px; margin:10px; float:left; }
+ p { clear:left; font-weight:bold; font-size:16px; 
+     color:blue; margin:0 10px; padding:2px; }
+ </style>
+ <script src="jquery-1.8.0.js"></script>
+</head>
+<body>
+  <div id="d" name="lhc"></div>
+<script>
+/*
+  console.log($("#d").length);
+  document.addEventListener("click", function() {
+  console.log(this);
+}, false);
+  fire(function(){console.log(this)})
+  function fire(fun){fun()}
+  setTimeout(function(){
+    console.log(1);
+    setTimeout(function(){
+        console.log(2);
+        setTimeout(function(){
+            debugger;
+            console.log(3);
+        },0)
+    },0)
+  },0)*/
+  // global environment
+ /*
+var x = 10;
+var y = 20;
+ 
+function foo(z) {
+ 
+  // environment of "foo" function
+  var q = 40;
+ 
+  function bar() {
+    // environment of "bar" function
+    debugger;
+    return x + z;
+  }
+ 
+  return bar;
+ 
+}
+ 
+// creation of "bar"
+var bar = foo(30);
+ 
+// applying of "bar"
+bar();*//*
+for (var i = 1000 ; i >= 0; i--) {
+  var obj = {};
+}
+for (var i = 1000 ; i >= 0; i--) {
+  var obj = new Object();
+}*/
+Function.prototype.bind = function (oThis) {
+    if (typeof this !== "function") {
+      // closest thing possible to the ECMAScript 5 internal IsCallable function
+      throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+    }
+ 
+    var aArgs = Array.prototype.slice.call(arguments, 1), 
+        fToBind = this, 
+        fNOP = function () {},
+        fBound = function () {
+          return fToBind.apply(this instanceof fNOP && oThis
+                                 ? this
+                                 : oThis,
+                               aArgs.concat(Array.prototype.slice.call(arguments)));
+        };
+ 
+    fNOP.prototype = this.prototype;
+    fBound.prototype = new fNOP();
+ 
+    return fBound;
+  };
+
+  function list() {
+  return Array.prototype.slice.call(arguments);
+}
+ 
+var list1 = list(1, 2, 3); // [1, 2, 3]
+ 
+//  Create a function with a preset leading argument
+var leadingZeroList = list.bind(undefined, 37);
+leadingZeroList();
+</script>
+</body>
+</html>

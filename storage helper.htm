@@ -1,0 +1,34 @@
+
+<!-- saved from url=(0035)http://v.qq.com/storage_helper.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="chrome-extension://mfjanagceblmeijonojeojjmjfiokgeo/domify.js"></script>
+		
+		<title>storage helper</title>
+	</head>
+	<body onload="init();">
+		<script type="text/javascript">
+			document.domain = "qq.com";
+			//创建数据库
+			function create(dbname, type){
+				if(type == "localStorage"){
+					return window.localStorage;
+				}
+				try {
+					var el = document.body; 
+					el.addBehavior("#default#userdata");
+					el.load(dbname);
+					return el;
+				} 
+				catch (ign) {
+					return false;
+				}
+			}
+			
+			function init(){
+				if(parent.QZFL.Storage) {
+					parent.QZFL.Storage.ifrCallback();
+				}
+			}
+		</script>
+	
+
+</body></html>

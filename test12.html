@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://static.iqiyi.com/js/lib/sea1.2.js"></script>
+
+  <script src="jquery/jquery-1.9.1.js"></script>
+</head>
+<body>
+<button id="b1" onclick="click">tongbu</button>
+<a href="" id="a1">tongbub</a>
+
+<button id="b2" onclick="click">hahahahah</button>
+<a href="" id="a2">clickme</a>
+
+<button id="b3" onclick="click">hahahahah</button>
+<a href="" id="a3">clickme</a>
+
+<button id="b4" onclick="click">hahahahah</button>
+<a href="" id="a4">clickme</a>
+
+<button id="b5" j-delegate="haha">hahahahah</button>
+<a href="" id="a5" j-delegate="haha">clickme</a>
+
+<script>
+// Q.$(document).delegate('haha',function(e){
+// e.event.preventDefault();
+// console.log('click')
+//   // setTimeout(function(){
+//       // window.open('http://www.baidu.com');
+//       // },500)
+// })
+
+ $('#b1').click(function(){
+    
+    window.open('http://www.baidu.com');
+    })
+
+ $('#a1').click(function(e){
+  e.preventDefault()
+    
+    window.open('http://www.baidu.com');
+    })
+
+   $('#b2').click(function(){
+    setTimeout(function(){
+      window.open('http://www.baidu.com');
+      },500)
+   })
+   $('#a2').click(function(e){
+  e.preventDefault()
+
+      setTimeout(function(){
+      window.open('http://www.baidu.com');
+      },500)
+   })
+
+  // Q.http.request('http://www.iqiyi.com',{
+  //   onsuccess:function(){
+  //       setTimeout(function(){
+  //             window.open('http://www.baidu.com');
+  //             },500)
+  //   },
+  //   onfailure:function(){
+  //     setTimeout(function(){
+  //           window.open('http://www.baidu.com');
+  //           },500)
+  //   },
+  //   cors:true
+  // })
+
+
+$('#a3').click(function(e){
+  e.preventDefault()
+
+     Q.http.request('http://www.iqiyi.com',{
+    onsuccess:function(){
+        // setTimeout(function(){
+              window.open('http://www.baidu.com');
+              // },500)
+    },
+    onfailure:function(){
+      setTimeout(function(){
+            window.open('http://www.baidu.com');
+            },500)
+    },
+    cors:true
+  })
+   })
+
+$('#b3').click(function(){
+      Q.http.request('http://www.iqiyi.com',{
+    onsuccess:function(){
+        // setTimeout(function(){
+              window.open('http://www.baidu.com');
+              // },500)
+    },
+    onfailure:function(){
+      // setTimeout(function(){
+            window.open('http://www.baidu.com');
+            // },500)
+    },
+    cors:true
+  })
+   })
+
+
+
+$('#a4').click(function(e){
+  e.preventDefault()
+     Q.http.request('http://qiyu.iqiyi.com/p13n?cids=-1_14,-2_16&area=lizard&uid=43b34bf507501f7f73c53de7020f4991&ppuid=&cb=test',{
+    onsuccess:function(data){
+        setTimeout(function(){
+              window.open('http://www.baidu.com');
+              },500)
+    },
+    onfailure:function(data){
+      setTimeout(function(){
+            window.open('http://www.baidu.com');
+            },500)
+    },
+    jsonp:true,
+    data:{
+      cb:'test'
+    }
+  })
+   })
+
+$('#b4').click(function(e){
+      Q.http.request('http://qiyu.iqiyi.com/p13n?cids=-1_14,-2_16&area=lizard&uid=43b34bf507501f7f73c53de7020f4991&ppuid=&cb=test',{
+    onsuccess:function(data){
+        setTimeout(function(){
+              window.open('http://www.baidu.com');
+              },500)
+    },
+    onfailure:function(){
+      setTimeout(function(){
+            window.open('http://www.baidu.com');
+            },500)
+    },
+    jsonp:true,
+    data:{
+      cb:'test'
+    }
+  })
+   })
+$('#a5').click(function(e){
+   e.preventDefault()
+  console.log('hahaha')
+})
+
+</script>
+</body>
+</html>

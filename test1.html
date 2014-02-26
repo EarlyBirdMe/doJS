@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        div {
+            color: blue;
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+    <script src="./jquery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="http://static.iqiyi.com/js/lib/sea1.2.js">
+    </script>
+</head>
+<body>
+<div data-test="xxx">
+    The values stored were
+    <span data-ch="xxx"></span>
+    and
+    <span></span>
+</div>
+<div class="cl"></div>
+<script>
+    try {
+        alert($('[data-test]'));
+        alert(Q.$('[data-test]'));
+    } catch (e) {
+        alert(e.message)
+    }
+    alert(Q.$('.cl'))
+</script>
+</body>
+</html>
