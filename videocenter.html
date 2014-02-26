@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video标签</title>
+    <style>
+    .videowrapper{
+        width: 640px;
+        height: 500px;
+        position: relative;
+        background-color: yellow;
+        /*display: table;*/
+    }
+    .videow{
+        width:100%;
+        text-align: center;
+        /*display: table-cell;*/
+        vertical-align: middle;
+    }
+    .video{
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+        margin: auto;
+    }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+    <div class="videowrapper">
+        <div class="videow">
+            <!-- <video src="http://123.125.118.78/videos/amusement/20130201/c5e69724f20f8abbe984b5ff7f6a589c.mp4?key=5fbf5722d5fe4c84" class="video" style=""></video> -->
+        </div>
+    </div>
+    <input type="button" id="play" value="play" style="">
+    <input type="button" id="dem" value="demension" style="">
+    <div id="ua" style="height:100px;width: 320px"></div>
+    <script>
+        $('#ua').html(navigator.userAgent)
+        $(function(){
+          var video = $('video');
+          $('#play').click(function(){
+            video[0].play();
+          })
+          $('#dem').click(function(){
+            alert(video[0].videoHeight);
+          })
+        })
+        
+    </script>
+</body>
+</html>

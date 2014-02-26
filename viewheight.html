@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>测试win8机viewheight</title>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+    <div class="wrapper" style="background-color: #ccc;">
+        <div id="ua"></div>
+        <div id="result" style="color:red"></div>
+        <div id="result1" style="color:red"></div>
+    </div>
+    <script>
+       window.onload = function(){
+            $('#ua').html(navigator.userAgent);
+            window.$log = function(message) {
+                var x = new Image;
+                x.src = "http://10.10.131.151/remotelog/write.php?message=" + encodeURIComponent(message) + "&=" + new Date().getTime();
+            }
+            $log(navigator.userAgent);
+
+            var getViewHeight = function(str){
+                var doc = document,
+                client = doc.compatMode == 'BackCompat' ? doc.body : doc.documentElement;
+                return client.clientHeight;
+            };
+            var getViewWidth = function(str){
+                var doc = document,
+                client = doc.compatMode == 'BackCompat' ? doc.body : doc.documentElement;
+                return client.clientWidth;
+            };
+            var sh = window.screen.height;
+            var sw = window.screen.width;
+            // alert(window.innerHeight + '-----------' + getViewHeight());
+            // alert(window.innerWidth + '-----------' + getViewWidth());
+            $(window).resize(function(){
+                $('#result').html('Height,Width: ' +  '(' + window.innerHeight+',' + window.innerWidth + ')'+ '---' +  '(' + getViewHeight() + ',' +getViewWidth() + ')' + '--------' + '(' + sh + ',' + sw + ')');
+                try{
+                    $('#result1').html('window.screen.availHeight' + window.screen.availHeight);
+                }catch(e){
+                    $('#result1').html(e.message)
+                }
+               
+                // alert(window.innerWidth + '-----------' + getViewWidth());
+            })
+        }
+    </script>
+</body>
+</html>

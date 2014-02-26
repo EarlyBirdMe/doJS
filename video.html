@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video标签</title>
+    <style>
+    .in{
+        position: absolute;
+        left: 50px;
+        top: 100px;
+        width: 100px;
+    }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
+</head>
+<body>
+    <video src="http://123.125.118.78/videos/amusement/20130201/c5e69724f20f8abbe984b5ff7f6a589c.mp4?key=5fbf5722d5fe4c84" style="height:400px;width:100%;border:1px solid #ccc;"></video>
+    <input type="button" value="button" class="in" style="">
+    <input type="submit" value="submit" class="in" style="left:200px">
+    <div id="ua"></div>
+    <script type="text/javascript">
+        $(function(){
+            var $btn = $('input');
+            $btn.click(function(){
+                alert('111');
+            })
+            $('#ua').html("<strong>" + navigator.userAgent + "</strong>");
+            try{
+                $('video')[0].audioTracks
+            }catch(e){
+                alert(e.message);
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video标签 什么时候能拿到videoHeight</title>
+    <meta name="viewport" content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <style>
+    html{
+        height: 100%;
+        -ms-text-size-adjust:none;
+        -webkit-text-size-adjust: none;
+        -ms-touch-action: none;
+    }
+    .controls {
+        margin-top: 30px;
+    }
+    .btn {
+        display: inline-block;
+        color:#fff;
+        padding: 12px 24px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        border: 1px solid #a7a9aa;
+        border-radius: 4px;
+        background-color: #428bca;
+        border-color: #428bca;
+    }
+    .btn:hover {
+        background-color: #357ebd;
+        border-color: #3071a9;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script> -->
+    <script src="jquery.cookie.js"></script>
+</head>
+<body>
+    <div class="wrapper" style="background-color: #ccc;height: 100%; overflow: hidden;border: 1px solid #cef">
+        <video src="http://123.125.118.78/videos/amusement/20130201/c5e69724f20f8abbe984b5ff7f6a589c.mp4?key=5fbf5722d5fe4c84"  style="height:400px;width:100%;border:1px solid #ccc;background:#000;" data-display="show" controls poster="">
+        </video>
+        <section class="controls">
+            <input type="button" id="play" value="play" style="" class="btn">
+            <input type="button" id="pause" value="pause" style="" class="btn">
+        </section>
+        <div id="ua"></div>
+        <textarea id="res" cols="200" rows="50"></textarea>
+        <a href="http://123.125.118.78/videos/amusement/20130201/c5e69724f20f8abbe984b5ff7f6a589c.mp4?key=5fbf5722d5fe4c84">点击链接播放</a>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            var video = $('video');
+            var $v = video[0];
+            var ua = navigator.userAgent;
+            if(/iphone/i.test(ua) || /ipad/i.test(ua)){
+                video.attr('src','http://r1---sn-i3co-i3bs.c.youtube.com/videoplayback?sparams=cp%2Cid%2Cip%2Cipbits%2Citag%2Cratebypass%2Csource%2Cupn%2Cexpire&upn=WefKr_SwozM&expire=1364749157&mv=m&ratebypass=yes&ipbits=8&el=watch&yms=6EDaZ7cxLTo&sver=3&key=yt1&cp=U0hVSVdPV19KUUNONV9PSUFCOjFCQ2NaMmNjSVVy&signature=80A01D2D69015DF5C9BA7125F70237B371FEAC4F.275CD08C49EC130CDAB6A694CAB9FEA166B14FA7&fexp=928009%2C913568%2C901632%2C914021%2C916624%2C922912%2C911924%2C932000%2C906383%2C902000%2C919512%2C929903%2C931202%2C900821%2C900823%2C931203%2C931401%2C908529%2C919373%2C930803%2C906836%2C920201%2C929602%2C930101%2C930603%2C900824%2C910223&mt=1364725458&ms=au&itag=18&dnc=1&app=youtube_mobile&ip=61.244.111.84&newshard=yes&source=youtube&id=5b23d2c79e6ed716&cpn=QiKKShc22c9AxVuu&ptk=mnet&oid=v9mY2iDO2L2wSVW4oaizUA&ptchn=Mnet&pltype=content')
+            }
+            $v.load();
+            $v.play();
+            $('#play').click(function(){
+                video[0].play();
+            })
+            $('#pause').click(function(){
+                video[0].pause();
+            })
+            $v.addEventListener('loadedmetadata',function(){
+                $('#res').append('\nloadedmetadata Height/Width: ' + $v.videoHeight + '/' + $v.videoWidth);
+            })
+            $v.addEventListener('play',function(){
+                $('#res').append('\nplay Height/Width: ' + $v.videoHeight + '/' + $v.videoWidth);
+            })
+            $v.addEventListener('timeupdate',function(){
+                $('#res').append('\nplaying Height/Width: ' + $v.videoHeight + '/' + $v.videoWidth);
+            })
+            
+            $('#ua').html(ua);
+        })
+    </script>
+        
+</body>
+</html>

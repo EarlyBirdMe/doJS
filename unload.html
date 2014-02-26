@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>unload</title>
+</head>
+<body>
+    <input type="button" value="click me" id="name">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $(window).unload(function(){
+                alert('bye')
+            })
+            $('#name').bind('click',function(){
+                console.log('hahaha')
+            })
+            // $('#name').click();
+        })
+    </script>
+</body>
+</html>

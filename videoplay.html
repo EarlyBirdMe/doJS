@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video标签 播放功能测试</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <style>
+    html{
+        height: 100%;
+        -ms-text-size-adjust:none;
+        -webkit-text-size-adjust: none;
+        -ms-touch-action: none;
+    }
+    .controls {
+        margin-top: 30px;
+    }
+    .btn {
+        display: inline-block;
+        color:#fff;
+        padding: 12px 24px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        border: 1px solid #a7a9aa;
+        border-radius: 4px;
+        background-color: #428bca;
+        border-color: #428bca;
+    }
+    .btn:hover {
+        background-color: #357ebd;
+        border-color: #3071a9;
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js">
+    </script>
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script> -->
+    <script src="jquery.cookie.js"></script>
+</head>
+<body>
+    <div class="wrapper" style="background-color: #ccc;height: 100%; overflow: hidden;border: 1px solid #cef">
+        <video src="http://123.125.118.78/videos/amusement/20130201/c5e69724f20f8abbe984b5ff7f6a589c.mp4?key=5fbf5722d5fe4c84"  style="height:400px;width:100%;border:1px solid #ccc;background:#000;" data-display="show" controls poster="">
+        </video>
+       <!--  <a href="http://123.125.118.78/videos/amusement/20130201/c5e69724f20f8abbe984b5ff7f6a589c.mp4?key=5fbf5722d5fe4c84" style="height:400px;width:100%;display:block;background:url(http://tv.sohu.com/upload/touch/skin/images/play@2x.png) no-repeat center center;"></a> -->
+        <section class="controls">
+            <input type="button" id="play" value="play" style="" class="btn">
+            <input type="button" id="pause" value="pause" style="" class="btn">
+            <input type="button" id="toggle" value="显示/隐藏" style="" class="btn">
+            <input type="button" id="fullscreen" value="fullscreen" style="" class="btn">
+        </section>
+        <div id="ua"></div>
+        <textarea id="res" cols="200" rows="50"></textarea>
+        <a href="http://123.125.118.78/videos/amusement/20130201/c5e69724f20f8abbe984b5ff7f6a589c.mp4?key=5fbf5722d5fe4c84">点击链接播放</a>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            var video = $('video');
+            var $v = video[0];
+            // $.cookie("zjc", "foo111",{expires:0});
+            // this.windowUnload=function(){
+            //     $.cookie("nam23123", "foo111")
+            // }
+            // if ('onpagehide' in window) {
+            //     $(window).on('pagehide',this.windowUnload);
+            //  }else{
+            //     $(window).on('unload',this.windowUnload);
+            //  }
+            var ua = navigator.userAgent;
+            if(/iphone/i.test(ua) || /ipad/i.test(ua)){
+                // video.attr('src','http://meta.video.qiyi.com/316/595c87e63350e647f7566fe7475579fc.m3u8');
+                video.attr('src','http://v.youku.com/player/getM3U8/vid/116061850/type/mp4/ts/1368169269/v.m3u8')
+                
+            }
+            $v.load();
+            $v.play();
+            $('#toggle').click(function(){
+                if(video.attr('data-display') === 'show'){
+                    video.hide();
+                    video.attr('data-display','hide');
+                }else{
+                    video.show();
+                    video.attr('data-display','show');
+                }
+            })
+            $('#play').click(function(){
+                video[0].play();
+            })
+            $('#pause').click(function(){
+                video[0].pause();
+            })
+            $('#fullscreen').click(function(){
+                video[0].webkitEnterFullScreen();
+            })
+            $v.addEventListener('loadedmetadata',function(){
+                $('#res').append('\nloadedmetadata Height/Width: ' + $v.videoHeight + '/' + $v.videoWidth);
+            })
+            $v.addEventListener('play',function(){
+                $('#res').append('\nplay Height/Width: ' + $v.videoHeight + '/' + $v.videoWidth);
+            })
+            $v.addEventListener('timeupdate',function(){
+                $('#res').append('\nplaying Height/Width: ' + $v.videoHeight + '/' + $v.videoWidth);
+            })
+            $v.addEventListener('ended',function(){
+                $('#res').append('\nended Height/Width: ' + $v.videoHeight + '/' + $v.videoWidth);
+            })
+            
+            $('#ua').html(ua);
+            // document.write('<script src="http://10.1.30.43:5271/target/target-script-min.js#anonymous"><'+'/script>')
+        })
+    </script>
+        
+</body>
+</html>

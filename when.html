@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://qgy18.imququ.com/file/when/when.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>when.js</title>
+	<style>img {height:300px;float:left;}</style>
+</head>
+<body>
+	<div id="container">
+        <!--<img src="./when_files/IMAG0038_2.jpg">-->
+    </div>
+	<script src="./jquery/jquery-1.10.2.js"></script>
+	<script src="./when_files/when.js"></script>
+	<script>
+		var api = 'http://qgy18.imququ.com/file/when/d.php?cb=?';
+
+var getData = function() {
+	var deferred = when.defer();
+
+	$.getJSON(api, function(data){
+	    deferred.resolve(data[0]);
+	});
+
+	return deferred.promise;
+}
+
+var getImg = function(src) {
+	var deferred = when.defer();
+
+	var img = new Image();
+
+	img.onload = function() {
+		deferred.resolve(img);
+	};
+
+	img.src = src;
+
+	return deferred.promise;
+}
+
+var showImg = function(img) {
+	$(img).appendTo($('#container'));
+}
+
+getData()
+.then(getImg)
+.then(showImg);
+
+	</script>
+
+</body></html>

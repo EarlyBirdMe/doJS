@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- saved from url=(0086)http://www.jakpsatweb.cz/css/priklady/vertical-horizontal-align-valid-solution-en.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><script type="text/javascript" src="chrome-extension://mfjanagceblmeijonojeojjmjfiokgeo/domify.js"></script>
+	<title>Vertical and horizontal centering in valid CSS</title>
+	
+	<style type="text/css">
+		#outer {height: 400px; overflow: hidden; position: relative; width: 100%;}
+		
+		#middle {position: absolute; top: 50%; width: 100%; text-align: center;} /* for explorer only*/
+		#middle[id] {display: table-cell; vertical-align: middle; position: static;}
+		
+		#inner {position: relative; top: -50%; text-align: left;} /* for explorer only */
+		#inner {width: 200px; margin-left: auto; margin-right: auto;} /* for all browsers*/
+		/* optional: #inner[id] {position: static;} */
+		
+		/* just format */
+		div.greenBorder {border: 1px solid green; background-color: ivory;}
+	</style>
+</head>
+
+<body>
+<h1>Vertical and horizontal centering in valid CSS - Example</h1>
+<div id="outer" class="greenBorder">
+	<div id="middle">
+		<div id="inner" class="greenBorder">
+			any text<br>
+			<b>any height, set width,</b><br>
+			any content, for example generated from DB<br>
+			everything is both vertically and horizontally centered<br>
+		</div>
+	</div>
+</div>
+
+
+<p>Please view source for details or read the
+<a href="http://www.jakpsatweb.cz/css/css-vertical-center-solution.html">CSS 
+vertical centering article</a>.
+</p>
+
+
+
+
+
+<div class="chrome-hosts-manager-ipaddr" title="&#24403;&#21069;&#26631;&#31614;&#39029;IP&#65306;&#28857;&#20987;&#38544;&#34255;">217.11.242.19</div></body></html>

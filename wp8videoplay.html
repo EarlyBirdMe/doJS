@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试wp8手机能否自动播放</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
+</head>
+<body>
+    <div class="wrapper" style="background-color: #ccc;height: 100%; overflow: hidden;">
+        <video src="http://123.125.118.78/videos/amusement/20130201/c5e69724f20f8abbe984b5ff7f6a589c.mp4?key=5fbf5722d5fe4c84"  style="height:400px;width:100%;border:1px solid #ccc;" data-display="show" controls poster autoplay></video>
+        <video id="v" poster="http://content.bitsontherun.com/thumbs/bkaovAYt-320.jpg" autoplay="" loop="" muted="" controls="">
+            <source src="http://content.bitsontherun.com/videos/bkaovAYt-52qL9xLP.mp4">
+            <source src="http://content.bitsontherun.com/videos/bkaovAYt-27m5HpIu.webm">
+            <p class="warning">Your browser does not support HTML5 video.</p>
+        </video>
+        <input type="button" id="play" value="play" style="">
+        <div id="ua"></div>
+    </div>
+
+    <script type="text/javascript">
+        $(function(){
+            var video = $('video');
+            var ua = navigator.userAgent;
+            // if(/iphone/i.test(ua) || /ipad/i.test(ua)){
+            //     video.attr('src','http://meta.video.qiyi.com/86/57f06c00c0c5f7b3d8c7a6353ba4cc4b.m3u8')
+            // }
+            
+            video[0].load();
+            video[0].play();
+                    
+            $('#play').click(function(){
+                video[0].play();
+            })
+            
+            $('#ua').html(ua);
+        })
+    </script>
+</body>
+</html>
